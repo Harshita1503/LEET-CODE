@@ -1,3 +1,5 @@
+'''You are given an array coordinates, coordinates[i] = [x, y], where [x, y] represents the coordinate of a point. Check if these points make a straight line in the XY plane.'''
+
 class Solution:
     def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
         if len(coordinates)==2:
