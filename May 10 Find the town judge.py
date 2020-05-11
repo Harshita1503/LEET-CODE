@@ -12,29 +12,27 @@ If the town judge exists and can be identified, return the label of the town jud
  
 class Solution:
     def findJudge(self, N: int, trust: List[List[int]]) -> int:
-        dic={}
-        for i in trust:
-            if i[0] in dic:
-                dic[i[0]].append(i[1])
-            else:
-                dic[i[0]]=[i[1]]
-        missing=0
-        for i in range(1,N+1):
-            if(missing>1):
-                break
-			#because there has to be only one judge in the town, 
-		    #so more than one missing key means there's no judge, so just break from loop
-            if(i not in dic):
-                missing+=1
-                ans=i
-        if(missing!=1):
+        n=1
+        count=0
+        a=[0]*N
+        for i in range (0,N):
+            a[i]=n
+            n=n+1
+        for i in range (0,len(trust)):
+            t=trust[i][0]
+            a[t-1]=-1
+        for i in range (0,len(a)):
+            if(a[i]!=-1):
+                val=a[i]
+                count=count+1
+        if(count!=1):
             return -1
-		#to verify that the missing key is the judge
-        if(missing==1):
-            for i in range(1,N+1):
-                if(i==ans):
-                    continue
-                if(ans not in dic[i]):
-                    return -1
-            return ans
-  
+        else:
+            count=0
+            for i in range (0,len(trust)):
+                if(trust[i][1]==val):
+                    count=count+1
+            if(count==N-1):
+                return val
+            else:
+                return -1
