@@ -1,0 +1,18 @@
+'''Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+You may assume that each input would have exactly one solution, and you may not use the same element twice.'''
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        
+        i = 0
+        j = len(nums) - 1
+        num1 = sorted(zip(range(len(nums)), nums), key = lambda x: x[1])
+        
+        while True:
+            res = num1[i][1] + num1[j][1]
+            if res == target:
+                return num1[i][0], num1[j][0]
+            elif res > target:
+                j -= 1
+            else:
+                i += 1
